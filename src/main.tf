@@ -29,7 +29,7 @@ resource "aws_rds_cluster" "main" {
   master_password                 = random_password.master_password.result
   deletion_protection             = var.deletion_protection
   backup_retention_period         = var.backup_retention_period
-  port                            = var.port
+  port                            = 5432
   enable_http_endpoint            = var.enable_http_endpoint
   db_subnet_group_name            = aws_db_subnet_group.main.name
 

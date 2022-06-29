@@ -29,7 +29,6 @@ params:
         timeout_action: RollbackCapacityChange
   required:
     - username
-    - port
   properties:
     username:
       title: Username
@@ -39,11 +38,6 @@ params:
       pattern: ^[a-zA-Z0-9]{1,32}$
       message:
         pattern: Username must be 1 to 32 characters, including uppercase and lowercase letters and numbers
-    port:
-      title: Port
-      description: The port on which to accept connections.
-      default: 5432
-      $ref: https://raw.githubusercontent.com/massdriver-cloud/artifact-definitions/main/definitions/types/port.json
     deletion_protection:
       title: Deletion Protection
       description: If the DB instance should have deletion protection enabled.
@@ -140,7 +134,6 @@ artifacts:
 
 ui:
   ui:order:
-    - port
     - username
     - scaling_configuration
     - allow_major_version_upgrade

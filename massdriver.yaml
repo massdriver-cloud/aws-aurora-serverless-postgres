@@ -201,9 +201,9 @@ ui:
     - scaling_configuration
     - monitoring
     - backup_retention_period
-    - skip_final_snapshot # TODO: should this just be false
+    - skip_final_snapshot
     - subnet_type
-    - enable_http_endpoint # TODO: remove this, data api is removed in v2
+    - enable_http_endpoint
     - "*"
     - apply_immediately
   scaling_configuration:

@@ -48,6 +48,5 @@ resource "aws_rds_cluster" "main" {
     timeout_action           = var.scaling_configuration["timeout_action"]
   }
 
-  # TODO: accept as argument
-  apply_immediately = true
+  apply_immediately = var.apply_immediately
 }

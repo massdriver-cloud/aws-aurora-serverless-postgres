@@ -60,7 +60,7 @@ Form input parameters for configuring a bundle for deployment.
 - **`backup_retention_period`** *(integer)*: How long to keep backups for in days. Minimum: `1`. Maximum: `35`. Default: `1`.
 - **`deletion_protection`** *(boolean)*: If the DB instance should have deletion protection enabled. Default: `True`.
 - **`enable_http_endpoint`** *(boolean)*: Whether or not to enable the Data API for a serverless Aurora database engine. Default: `False`.
-- **`major_version`** *(integer)*: PostgreSQL major version. Minor version upgrades are performed automatically. **Note:** Aurora V1 only supports PG 10 & 11. PG 10 EOL is scheduled for January 2023. Must be one of: `[10, 11]`.
+- **`major_version`** *(integer)*: PostgreSQL major version. Minor version upgrades are performed automatically. **Note:** Aurora V1 only supports PG 10 & 11. PG 10 EOL is scheduled for January 2023. Must be one of: `[10, 11]`. Default: `10`.
 - **`monitoring`** *(object)*
   - **`mode`** *(string)*: Enable and customize CloudWatch metric alarms. Default: `AUTOMATED`.
     - **One of**

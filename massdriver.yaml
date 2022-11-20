@@ -35,6 +35,7 @@ params:
     major_version:
       title: Major Version
       type: integer
+      default: 10
       description: "PostgreSQL major version. Minor version upgrades are performed automatically. **Note:** Aurora V1 only supports PG 10 & 11. PG 10 EOL is scheduled for January 2023."
       enum:
         - 10

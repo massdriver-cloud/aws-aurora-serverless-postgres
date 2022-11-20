@@ -1,6 +1,6 @@
 schema: draft-07
 name: aws-aurora-serverless-postgres
-description: "Highly Available Serverless Postgres Service At 1/10th The Cost Of Commercial-Grade Databases."
+description: "Aurora v1. Highly Available Serverless Postgres Service At 1/10th The Cost Of Commercial-Grade Databases."
 source_url: github.com/massdriver-cloud/aws-aurora-serverless-postgres
 access: public
 type: bundle

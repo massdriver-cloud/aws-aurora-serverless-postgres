@@ -1,9 +1,10 @@
 locals {
   vpc_id              = element(split("/", var.vpc.data.infrastructure.arn), 1)
+  major_version       = var.major_version
   postgresql_protocol = "tcp"
   subnet_ids = {
     "internal" = [for subnet in var.vpc.data.infrastructure.internal_subnets : element(split("/", subnet["arn"]), 1)]
-    "private" = [for subnet in var.vpc.data.infrastructure.private_subnets : element(split("/", subnet["arn"]), 1)]
+    "private"  = [for subnet in var.vpc.data.infrastructure.private_subnets : element(split("/", subnet["arn"]), 1)]
   }
 }
 resource "random_password" "master_password" {
@@ -16,15 +17,17 @@ resource "random_id" "snapshot_identifier" {
 }
 
 resource "aws_rds_cluster" "main" {
-  engine_mode                     = "serverless"
-  engine                          = "aurora-postgresql"
-  db_cluster_parameter_group_name = "default.aurora-postgresql10"
+  engine_mode    = "serverless"
+  engine         = "aurora-postgresql"
+  engine_version = local.major_version
+
+  db_cluster_parameter_group_name = "default.aurora-postgresql${local.major_version}"
   storage_encrypted               = true
   copy_tags_to_snapshot           = true
+  allow_major_version_upgrade     = true
   skip_final_snapshot             = var.skip_final_snapshot
   final_snapshot_identifier       = var.skip_final_snapshot ? null : "${var.md_metadata.name_prefix}-${element(concat(random_id.snapshot_identifier.*.hex, [""]), 0)}"
   cluster_identifier              = var.md_metadata.name_prefix
-  allow_major_version_upgrade     = var.allow_major_version_upgrade
   master_username                 = var.username
   master_password                 = random_password.master_password.result
   deletion_protection             = var.deletion_protection
@@ -45,46 +48,6 @@ resource "aws_rds_cluster" "main" {
     timeout_action           = var.scaling_configuration["timeout_action"]
   }
 
-  # TODO: not sure this applies to serverless
-  # apply_immediately               = var.apply_immediately
-
-  # TODO: for restoring from a snapshot
-  # snapshot_identifier                 = var.snapshot_identifier
-
-  # TODO: md connection input
-  # iam_roles                           = var.iam_roles
-
-  # TODO: md connection input
-  # kms_key_id                          = var.kms_key_id
-}
-
-# ################################################################################
-# # Security Group
-# ################################################################################
-
-
-resource "aws_db_subnet_group" "main" {
-  name        = var.md_metadata.name_prefix
-  description = "For Aurora cluster ${var.md_metadata.name_prefix}"
-  subnet_ids  = local.subnet_ids[var.subnet_type]
-}
-
-resource "aws_security_group" "main" {
-  vpc_id      = local.vpc_id
-  name_prefix = "${var.md_metadata.name_prefix}-"
-  description = "Control traffic to/from RDS Aurora ${var.md_metadata.name_prefix}"
-}
-
-resource "aws_security_group_rule" "vpc_ingress" {
-  count = 1
-
-  description = "From allowed CIDRs"
-
-  type        = "ingress"
-  from_port   = aws_rds_cluster.main.port
-  to_port     = aws_rds_cluster.main.port
-  protocol    = local.postgresql_protocol
-  cidr_blocks = [var.vpc.data.infrastructure.cidr]
-
-  security_group_id = aws_security_group.main.id
+  # TODO: accept as argument
+  apply_immediately = true
 }

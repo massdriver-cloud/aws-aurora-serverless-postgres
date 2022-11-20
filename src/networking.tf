@@ -10,16 +10,14 @@ resource "aws_security_group" "main" {
   description = "Control traffic to/from RDS Aurora ${var.md_metadata.name_prefix}"
 }
 
+# TODO: Remove this once we have application w/ AWS Sec Groups
 resource "aws_security_group_rule" "vpc_ingress" {
-  count = 1
-
-  description = "From allowed CIDRs"
-
-  type        = "ingress"
-  from_port   = aws_rds_cluster.main.port
-  to_port     = aws_rds_cluster.main.port
-  protocol    = local.postgresql_protocol
-  cidr_blocks = [var.vpc.data.infrastructure.cidr]
-
+  count             = 1
+  description       = "From allowed CIDRs"
+  type              = "ingress"
+  from_port         = aws_rds_cluster.main.port
+  to_port           = aws_rds_cluster.main.port
+  protocol          = local.postgresql_protocol
+  cidr_blocks       = [var.vpc.data.infrastructure.cidr]
   security_group_id = aws_security_group.main.id
 }

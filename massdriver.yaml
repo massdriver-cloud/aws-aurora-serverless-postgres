@@ -30,6 +30,7 @@ params:
   required:
     - username
     - major_version
+    - apply_immediately
   properties:
     major_version:
       title: Major Version
@@ -63,6 +64,11 @@ params:
       default: 1
       minimum: 1
       maximum: 35
+    apply_immediately:
+      title: Apply Immediately
+      type: boolean
+      description: Apply changes immediately or during your cluster's next scheduled maintenance window.
+      default: true
     subnet_type:
       title: Subnet Type
       description: Deploy the database to internal subnets (cannot reach the internet) or private subnets (internet egress traffic allowed)
@@ -198,6 +204,7 @@ ui:
     - subnet_type
     - enable_http_endpoint # TODO: remove this, data api is removed in v2
     - "*"
+    - apply_immediately
   scaling_configuration:
     ui:order:
       - min_capacity

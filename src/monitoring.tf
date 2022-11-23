@@ -1,6 +1,4 @@
-
 locals {
-
   _automatic_database_capacity_threshold = 0.9
   automated_alarms = {
     database_capacity = {

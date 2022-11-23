@@ -17,9 +17,10 @@ resource "random_id" "snapshot_identifier" {
 }
 
 resource "aws_rds_cluster" "main" {
-  engine_mode    = "serverless"
-  engine         = "aurora-postgresql"
-  engine_version = local.major_version
+  engine_mode         = "serverless"
+  engine              = "aurora-postgresql"
+  engine_version      = local.major_version
+  snapshot_identifier = var.restore_from_snapshot
 
   db_cluster_parameter_group_name = "default.aurora-postgresql${local.major_version}"
   storage_encrypted               = true

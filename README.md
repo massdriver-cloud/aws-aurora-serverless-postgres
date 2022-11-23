@@ -67,6 +67,17 @@ Form input parameters for configuring a bundle for deployment.
       - Automated
       - Custom
       - Disabled
+- **`restore_from_snapshot`** *(string)*: Restore from a previous RDS snapshot.
+
+  Examples:
+  ```json
+  "arn:aws:rds::ACCOUNT_NUMBER:db/prod"
+  ```
+
+  ```json
+  "arn:aws:ec2::ACCOUNT_NUMBER:vpc/vpc-foo"
+  ```
+
 - **`scaling_configuration`** *(object)*: Serverless scaling properties.
   - **`auto_pause`** *(boolean)*: Whether to enable automatic pause. A DB cluster can be paused only when it's idle (it has no connections). Default: `True`.
   - **`max_capacity`** *(number)*: Each capacity unit is equivalent to a specific compute and memory configuration. Based on the maximum capacity unit setting, Aurora Serverless automatically creates scaling rules for thresholds for CPU utilization, connections, and available memory. Aurora Serverless provides more capacity for the DB cluster from warm pool of resources when its workload is above these thresholds. Aurora Serverless can increase capacity to the maximum capacity unit. Must be one of: `[2, 4, 8, 16, 32, 64, 192, 384]`. Default: `4`.

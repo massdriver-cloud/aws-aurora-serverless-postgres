@@ -40,6 +40,11 @@ params:
       enum:
         - 10
         - 11
+    restore_from_snapshot:
+      $md.immutable: true
+      title: Restore From Snapshot
+      description: Restore from a previous RDS snapshot.
+      $ref: https://raw.githubusercontent.com/massdriver-cloud/artifact-definitions/main/definitions/types/aws-arn.json
     username:
       title: Username
       description: Administrative (root) DB username
@@ -197,6 +202,7 @@ ui:
   ui:order:
     - major_version
     - username
+    - restore_from_snapshot
     - deletion_protection
     - scaling_configuration
     - monitoring

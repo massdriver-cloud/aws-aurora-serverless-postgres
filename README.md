@@ -67,7 +67,14 @@ Form input parameters for configuring a bundle for deployment.
       - Automated
       - Custom
       - Disabled
-- **`restore_from_snapshot`** *(string)*: Restore from a previous RDS snapshot.
+- **`scaling_configuration`** *(object)*: Serverless scaling properties.
+  - **`auto_pause`** *(boolean)*: Whether to enable automatic pause. A DB cluster can be paused only when it's idle (it has no connections). Default: `True`.
+  - **`max_capacity`** *(number)*: Each capacity unit is equivalent to a specific compute and memory configuration. Based on the maximum capacity unit setting, Aurora Serverless automatically creates scaling rules for thresholds for CPU utilization, connections, and available memory. Aurora Serverless provides more capacity for the DB cluster from warm pool of resources when its workload is above these thresholds. Aurora Serverless can increase capacity to the maximum capacity unit. Must be one of: `[2, 4, 8, 16, 32, 64, 192, 384]`. Default: `4`.
+  - **`min_capacity`** *(number)*: Each capacity unit is equivalent to a specific compute and memory configuration. Based on the minimum capacity unit setting, Aurora Serverless automatically creates scaling rules for thresholds for CPU utilization, connections, and available memory. Aurora Serverless reduces the resources for the DB cluster when its workload is below these thresholds. Aurora Serverless can reduce capacity down to the minimum capacity unit. Must be one of: `[2, 4, 8, 16, 32, 64, 192, 384]`. Default: `2`.
+  - **`seconds_until_auto_pause`** *(number)*: The time, in seconds, before an Aurora DB cluster in serverless mode is paused. Minimum: `300`. Maximum: `86400`. Default: `300`.
+  - **`timeout_action`** *(string)*: The action to take when the timeout is reached. [Learn more](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.how-it-works.html#aurora-serverless.how-it-works.timeout-action). Must be one of: `['ForceApplyCapacityChange', 'RollbackCapacityChange']`. Default: `RollbackCapacityChange`.
+- **`skip_final_snapshot`** *(boolean)*: Determines whether a final DB snapshot is created before the DB cluster is deleted. If true is specified, no DB snapshot is created. Default: `True`.
+- **`source_snapshot`** *(string)*: On **creation**, restores a database from snapshot.
 
   Examples:
   ```json
@@ -78,13 +85,6 @@ Form input parameters for configuring a bundle for deployment.
   "arn:aws:ec2::ACCOUNT_NUMBER:vpc/vpc-foo"
   ```
 
-- **`scaling_configuration`** *(object)*: Serverless scaling properties.
-  - **`auto_pause`** *(boolean)*: Whether to enable automatic pause. A DB cluster can be paused only when it's idle (it has no connections). Default: `True`.
-  - **`max_capacity`** *(number)*: Each capacity unit is equivalent to a specific compute and memory configuration. Based on the maximum capacity unit setting, Aurora Serverless automatically creates scaling rules for thresholds for CPU utilization, connections, and available memory. Aurora Serverless provides more capacity for the DB cluster from warm pool of resources when its workload is above these thresholds. Aurora Serverless can increase capacity to the maximum capacity unit. Must be one of: `[2, 4, 8, 16, 32, 64, 192, 384]`. Default: `4`.
-  - **`min_capacity`** *(number)*: Each capacity unit is equivalent to a specific compute and memory configuration. Based on the minimum capacity unit setting, Aurora Serverless automatically creates scaling rules for thresholds for CPU utilization, connections, and available memory. Aurora Serverless reduces the resources for the DB cluster when its workload is below these thresholds. Aurora Serverless can reduce capacity down to the minimum capacity unit. Must be one of: `[2, 4, 8, 16, 32, 64, 192, 384]`. Default: `2`.
-  - **`seconds_until_auto_pause`** *(number)*: The time, in seconds, before an Aurora DB cluster in serverless mode is paused. Minimum: `300`. Maximum: `86400`. Default: `300`.
-  - **`timeout_action`** *(string)*: The action to take when the timeout is reached. [Learn more](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.how-it-works.html#aurora-serverless.how-it-works.timeout-action). Must be one of: `['ForceApplyCapacityChange', 'RollbackCapacityChange']`. Default: `RollbackCapacityChange`.
-- **`skip_final_snapshot`** *(boolean)*: Determines whether a final DB snapshot is created before the DB cluster is deleted. If true is specified, no DB snapshot is created. Default: `True`.
 - **`subnet_type`** *(string)*: Deploy the database to internal subnets (cannot reach the internet) or private subnets (internet egress traffic allowed). Must be one of: `['internal', 'private']`. Default: `internal`.
 - **`username`** *(string)*: Administrative (root) DB username. Default: `root`.
 ## Examples

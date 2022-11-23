@@ -40,11 +40,12 @@ params:
       enum:
         - 10
         - 11
-    restore_from_snapshot:
+    source_snapshot:
       $md.immutable: true
-      title: Restore From Snapshot
-      description: Restore from a previous RDS snapshot.
+      title: Create Database from Snapshot
+      description: On **creation**, restores a database from snapshot.
       $ref: https://raw.githubusercontent.com/massdriver-cloud/artifact-definitions/main/definitions/types/aws-arn.json
+      pattern: "^arn:aws:[a-zA-Z0-9._-]*:[a-zA-Z0-9._-]*:[0-9]{12}:cluster-snapshot:[a-zA-Z0-9/._-]+$"
     username:
       title: Username
       description: Administrative (root) DB username
@@ -202,7 +203,7 @@ ui:
   ui:order:
     - major_version
     - username
-    - restore_from_snapshot
+    - source_snapshot
     - deletion_protection
     - scaling_configuration
     - monitoring

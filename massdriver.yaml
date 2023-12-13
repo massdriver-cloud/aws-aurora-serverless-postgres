@@ -45,7 +45,7 @@ params:
       title: Create Database from Snapshot
       description: On **creation**, restores a database from snapshot.
       $ref: https://raw.githubusercontent.com/massdriver-cloud/artifact-definitions/main/definitions/types/aws-arn.json
-      pattern: "^arn:aws:[a-zA-Z0-9._-]*:[a-zA-Z0-9._-]*:[0-9]{12}:cluster-snapshot:[a-zA-Z0-9/._-]+$"
+      pattern: "^arn:aws:[a-zA-Z0-9._-]*:[a-zA-Z0-9._-]*:[0-9]{12}:cluster-snapshot:[a-zA-Z0-9/.:_-]+$"
     username:
       title: Username
       description: Administrative (root) DB username

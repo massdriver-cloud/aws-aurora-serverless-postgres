@@ -45,7 +45,7 @@ Form input parameters for configuring a bundle for deployment.
 - **`enable_http_endpoint`** *(boolean)*: Whether or not to enable the Data API for a serverless Aurora database engine. Default: `False`.
 - **`major_version`** *(integer)*: PostgreSQL major version. Minor version upgrades are performed automatically. **Note:** Aurora V1 only supports PG 10, 11, & 13. PG 10 EOL is scheduled for January 2023. Must be one of: `[10, 11, 13]`. Default: `13`.
 - **`monitoring`** *(object)*
-  - **`mode`** *(string)*: Enable and customize CloudWatch metric alarms. Default: `AUTOMATED`.
+  - **`mode`** *(string)*: Enable, disable, or customize CloudWatch metric alarms. Default: `AUTOMATED`.
     - **One of**
       - Automated
       - Custom

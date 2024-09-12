@@ -136,17 +136,7 @@ params:
       title: Monitoring
       properties:
         mode:
-          title: Alarm Mode
-          description: Enable and customize CloudWatch metric alarms.
-          type: string
-          default: AUTOMATED
-          oneOf:
-            - const: AUTOMATED
-              title: Automated
-            - const: CUSTOM
-              title: Custom
-            - const: DISABLED
-              title: Disabled
+          $ref: https://raw.githubusercontent.com/massdriver-cloud/json-schemas/main/massdriver/properties/monitoring/mode.json
       dependencies:
         mode:
           oneOf:

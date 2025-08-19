@@ -3,7 +3,6 @@ name: aws-aurora-serverless-postgres
 version: 1.0.0
 description: Aurora v1. Highly Available Serverless Postgres Service At 1/10th The Cost Of Commercial-Grade Databases.
 source_url: https://github.com/massdriver-cloud/aws-aurora-serverless-postgres
-type: application
 steps:
 - path: src
   provisioner: opentofu

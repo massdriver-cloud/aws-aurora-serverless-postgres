@@ -17,9 +17,8 @@ locals {
 }
 
 resource "massdriver_artifact" "authentication" {
-  field                = "authentication"
-  provider_resource_id = aws_rds_cluster.main.arn
-  name                 = "'Root' Postgres user credentials: ${aws_rds_cluster.main.cluster_identifier}"
+  field    = "authentication"
+  name     = "'Root' Postgres user credentials: ${aws_rds_cluster.main.cluster_identifier}"
   artifact = jsonencode(
     {
       data = {
